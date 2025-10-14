@@ -9,11 +9,11 @@ export const Navbar = () => {
         { name: 'Contact', tag: '#contact' },
     ]
   return (
-    <nav className="flex gap-2 justify-center">
+    <nav className="flex gap-2 justify-center bg-(--primary) p-2">
         {appcontent.map(( {tag,name},idx ) => {
             return (
-                <a href={tag} className="text-(--secondary)">
-                    {name}<span className="text-(--primary)">{idx < appcontent.length - 1 ?'>' : ''}</span>
+                <a href={tag} className="text-(--secondary) flex flex-row items-center gap-1">
+                    {name}<span className="text-(--complementary)">{idx < appcontent.length - 1 ?'>' : ''}</span>
                 </a>
             )
         })}
