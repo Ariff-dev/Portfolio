@@ -9,14 +9,12 @@ export const Navbar = () => {
         { name: 'Contact', tag: '#contact' },
     ]
   return (
-    <nav className="flex gap-2">
+    <nav className="flex gap-2 justify-center">
         {appcontent.map(( {tag,name},idx ) => {
             return (
-                <p>
-                    <a href={tag} className="text-(--secondary)">
-                        {name}<span className="text-(--primary)">{idx < appcontent.length - 1 && ' >'}</span>
-                    </a>
-                </p>
+                <a href={tag} className="text-(--secondary)">
+                    {name}<span className="text-(--primary)">{idx < appcontent.length - 1 ?'>' : ''}</span>
+                </a>
             )
         })}
     </nav>
