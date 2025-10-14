@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@theme {
+    --primary: #D5A021;
+    --secondary: #4B4237;
+    --tertiary: #A49694;
+    --complementary: #736B60;
+    --contrast: #EDE7D9;
+    --background: #ffffff;
+}
