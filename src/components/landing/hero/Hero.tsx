@@ -1,4 +1,5 @@
 import Photo from '../../../assets/me.png'
+import TechCarousel from './TechCarrousel'
 
 
 export const Hero = () => {
@@ -9,6 +10,8 @@ export const Hero = () => {
           <span className='text-lg '>Ariff Martinez</span>
           <p className='text-prtimary text-(--secondary)'>FinTech Software Developer - Backend and Data</p>
       </div>
+      
+      <TechCarousel />
     </section>
   )
 }

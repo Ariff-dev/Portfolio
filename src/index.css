@@ -21,3 +21,17 @@
     @apply w-full max-w-md mx-auto;
   }
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* animación fluida e infinita */
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
