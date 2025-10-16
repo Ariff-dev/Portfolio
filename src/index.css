@@ -6,18 +6,30 @@
     --tertiary: #A49694;
     --complementary: #736B60;
     --contrast: #EDE7D9;
-    --background: #ffffff;
-
-
+    --background: #EDE8D0;
 }
 
 
 @layer components {
   .app-container {
-    @apply min-h-screen justify-center bg-gray-50 px-4 py-8;
+    @apply min-h-screen justify-center bg-(--background) px-4 ;
   }
   
   .app-content {
     @apply w-full max-w-md mx-auto;
   }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* animación fluida e infinita */
+.animate-marquee {
+  animation: marquee 20s linear infinite;
 }

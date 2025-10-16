@@ -9,14 +9,21 @@ export const Navbar = () => {
         { name: 'Contact', tag: '#contact' },
     ]
   return (
-    <nav className="flex gap-2 justify-center bg-(--primary) p-2">
-        {appcontent.map(( {tag,name},idx ) => {
-            return (
-                <a href={tag} className="text-(--secondary) flex flex-row items-center gap-1">
-                    {name}<span className="text-(--complementary)">{idx < appcontent.length - 1 ?'>' : ''}</span>
-                </a>
-            )
-        })}
+    <nav
+        className="fixed top-1 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-[var(--primary)] rounded-xl shadow-md"
+    >
+    {appcontent.map(({ tag, name }, idx) => (
+        <a
+        key={idx}
+        href={tag}
+        className="text-[var(--secondary)] font-medium hover:opacity-80 transition"
+        >
+        {name}
+        {idx < appcontent.length - 1 && (
+            <span className="mx-1 text-[var(--secondary)]">{'>'}</span>
+        )}
+        </a>
+    ))}
     </nav>
   )
 }
