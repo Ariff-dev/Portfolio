@@ -11,7 +11,6 @@ export const Hero = () => {
           <p className='text-prtimary text-(--secondary) text-lg text-center'>Software Developer & Analyst<span className='block text-(--primary)'>Financial Technology</span></p>
           <p className=''>As a Developer and Analyst at the heart of the FinTech industry, my role is to be the bridge between business strategy and technical execution. I specialize in backend development, transforming the complex logic of mortgage and automotive credit products into the simulators and applications that drive the business.</p>
       </div>
-      
       <TechCarousel />
     </section>
   )
