@@ -24,7 +24,7 @@ const TechCarousel = () => {
   const items = Array(6).fill(technologies).flat();
 
   return (
-    <div className="overflow-hidden w-full p-2 bg-(--primary)">
+    <div className="overflow-hidden w-full p-2 bg-(--primary) rounded-sm">
       <div className="flex animate-marquee whitespace-nowrap">
         {items.map((tech, i) => (
           <div
