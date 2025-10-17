@@ -1,7 +1,7 @@
 export const About = () => {
   return (
     <section id='about' className='flex flex-col gap-4'>
-      <h2 className='text-(--primary) text-xl'>Hello There!</h2>
+      <h2 className='text-(--primary) text-2xl'>Hello There!</h2>
       <p>
         Hi there! I’m a product-focused Software Developer and a final-year
         Software Engineering student passionate about building technology that
