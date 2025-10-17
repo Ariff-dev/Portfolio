@@ -1,4 +1,4 @@
-import { FaReact, FaAngular, FaPython, FaPhp, FaDatabase, FaGitAlt, FaUbuntu, FaBug } from 'react-icons/fa';
+import { FaReact, FaAngular, FaPython, FaPhp, FaDatabase, FaUbuntu, FaBug } from 'react-icons/fa';
 import { SiTailwindcss, SiFlask, SiPostgresql, SiMysql, SiNginx } from 'react-icons/si';
 import { MdApi } from 'react-icons/md';
 
