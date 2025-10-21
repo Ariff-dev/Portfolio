@@ -1,12 +1,26 @@
-import { FaReact, FaAngular, FaPython, FaPhp, FaDatabase, FaUbuntu, FaBug } from 'react-icons/fa';
-import { SiTailwindcss, SiFlask, SiPostgresql, SiMysql, SiNginx } from 'react-icons/si';
-import { MdApi } from 'react-icons/md';
+import {
+  FaReact,
+  FaAngular,
+  FaPython,
+  FaPhp,
+  FaDatabase,
+  FaUbuntu,
+  FaBug,
+} from 'react-icons/fa'
+import {
+  SiTailwindcss,
+  SiFlask,
+  SiPostgresql,
+  SiMysql,
+  SiNginx,
+} from 'react-icons/si'
+import { MdApi } from 'react-icons/md'
 
 export const Stack = () => {
   return (
-    <section id='stack' className='min-h-screen py-4'>
+    <section id='stack' className=' py-4'>
       <h2 className='text-(--primary) text-2xl text-pretty'>Tech Stacks</h2>
-      
+
       {/* Primary Stack */}
       <div className='py-4 flex flex-col'>
         <h3 className='text-lg bg-(--secondary) text-pretty text-(--contrast) text-center rounded-t-sm'>

@@ -51,7 +51,7 @@ export const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 bg-[var(--primary)] rounded-xl shadow-lg transition-all duration-300 z-50 ${
+      className={`fixed top-0 text-sm md:px-4  left-1/2 transform -translate-x-1/2 py-3 bg-[var(--primary)] rounded-xl shadow-lg transition-all duration-300 z-50 ${
         isVisible
           ? 'opacity-100 translate-y-0'
           : 'opacity-0 -translate-y-4 pointer-events-none'

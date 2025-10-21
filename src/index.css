@@ -16,7 +16,7 @@
   }
   
   .app-content {
-    @apply w-full max-w-md mx-auto;
+    @apply w-full max-w-md mx-auto md:max-w-6xl;
   }
 }
 
