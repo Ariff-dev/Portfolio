@@ -1,75 +1,51 @@
-# React + TypeScript + Vite
+# 💼 Personal Portfolio - Ariff Martinez
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/your-badge-id/deploy-status)](https://app.netlify.com/sites/ariff-dev/deploys)
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://ariff-dev.netlify.app/)
 
-Currently, two official plugins are available:
+## 🚀 About The Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Personal web portfolio developed to showcase my professional experience, technical skills, and projects as a Software Developer & Analyst specialized in FinTech. This site serves as my digital introduction, highlighting my journey from front-end development to back-end and data engineering.
 
-## React Compiler
+**🔗 Live Demo:** [ariff-dev.netlify.app](https://ariff-dev.netlify.app/)
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## 👨‍💻 About Me
 
-Note: This will impact Vite dev & build performances.
+I'm a product-focused Software Developer and final-year Software Engineering student. Currently working in the FinTech sector, where I specialize in:
 
-## Expanding the ESLint configuration
+- 🏦 PHP back-end development for mortgage and automotive credit products
+- 🔄 Process automation and data-driven tools
+- 🌉 Bridging business strategy and technical execution
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+My passion is building technology that solves real problems, starting at age 15 when I learned Java to create a Minecraft server for my friends.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Built With
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Frontend
+- **React** - JavaScript library for building user interfaces
+- **Tailwind CSS** - Utility-first CSS framework for responsive, modern design
+- **JavaScript/ES6+** - Core programming language
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Deployment & Hosting
+- **Netlify** - Deployment platform with automatic CI/CD
+- **Git** - Version control
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Technical Features
+- ✨ Responsive and mobile-first design
+- 🎨 Modern UI with smooth animations
+- ⚡ Performance optimization
+- 📱 Cross-device compatibility
+- 🌐 Dynamic and interactive sections
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📧 Contact
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Email**: ariff.dev24@gmail.com
+- **LinkedIn**: [Ariff Martinez](https://linkedin.com/in/your-profile)
+- **GitHub**: [Your GitHub](https://github.com/your-username)
+- **Portfolio**: [ariff-dev.netlify.app](https://ariff-dev.netlify.app/)
+
+---
+
+⭐ **Made with ❤️ and ☕ by Ariff Martinez**
+
+*Built with React & Tailwind CSS*
