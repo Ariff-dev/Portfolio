@@ -1,6 +1,5 @@
 # 💼 Personal Portfolio - Ariff Martinez
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/your-badge-id/deploy-status)](https://app.netlify.com/sites/ariff-dev/deploys)
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://ariff-dev.netlify.app/)
 
 ## 🚀 About The Project
