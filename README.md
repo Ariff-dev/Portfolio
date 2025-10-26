@@ -39,7 +39,7 @@ My passion is building technology that solves real problems, starting at age 15 
 ## 📧 Contact
 
 - **Email**: ariff.dev24@gmail.com
-- **LinkedIn**: [Ariff Martinez](https://linkedin.com/in/ariff-dev)
+- **LinkedIn**: [Ariff Martinez](https://linkedin.com/in/ariff-martinez)
 
 ---
 
