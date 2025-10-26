@@ -39,9 +39,7 @@ My passion is building technology that solves real problems, starting at age 15 
 ## 📧 Contact
 
 - **Email**: ariff.dev24@gmail.com
-- **LinkedIn**: [Ariff Martinez](https://linkedin.com/in/your-profile)
-- **GitHub**: [Your GitHub](https://github.com/your-username)
-- **Portfolio**: [ariff-dev.netlify.app](https://ariff-dev.netlify.app/)
+- **LinkedIn**: [Ariff Martinez](https://linkedin.com/in/ariff-dev)
 
 ---
 
