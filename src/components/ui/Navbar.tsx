@@ -10,6 +10,7 @@ const appcontent: AppContentNav[] = [
   { name: 'About', tag: '#about' },
   { name: 'Stack', tag: '#stack' },
   { name: 'Experience', tag: '#exp' },
+  { name: 'Portfolio', tag: '#portfolio' },
   { name: 'Contact', tag: '#contact' },
 ]
 
