@@ -7,3 +7,16 @@ export interface Tech {
   icon: ReactNode;
   category: TechCategory;
 }
+
+export interface StatCardProps {
+  value: string;
+  label: string;
+}
+
+export interface SocialLinkProps {
+  href: string;
+  label: string;
+  download?: boolean;
+  external?: boolean;
+  children: React.ReactNode;
+}

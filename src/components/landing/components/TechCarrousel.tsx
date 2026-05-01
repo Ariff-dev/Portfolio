@@ -18,7 +18,7 @@ import {
 } from "react-icons/si";
 import type { TechCategory, Tech } from "../interfaces";
 
-const ICON_SIZE = 28;
+const ICON_SIZE = 20;
 
 const COLOR: Record<TechCategory, string> = {
   frontend: "var(--primary)",
@@ -99,33 +99,14 @@ const technologies: Tech[] = [
   },
 ];
 
-const TechGrid = () => {
+export const TechCarousel = () => {
   return (
-    <div className="w-full">
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(82px, 1fr))",
-          gap: "12px",
-        }}
-      >
+    <div className="tech-grid-wrapper">
+      <div className="tech-grid-inner">
         {technologies.map((tech) => (
           <div
             key={tech.name}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "8px",
-              padding: "14px 8px",
-              borderRadius: "10px",
-              backgroundColor: "var(--surface)",
-              border: "1px solid var(--border)",
-              cursor: "default",
-              transition:
-                "transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease",
-            }}
+            className="tech-card"
             onMouseEnter={(e) => {
               const el = e.currentTarget;
               el.style.transform = "translateY(-3px)";
@@ -140,23 +121,10 @@ const TechGrid = () => {
             }}
           >
             {tech.icon}
-            <span
-              style={{
-                fontSize: "11px",
-                fontWeight: 500,
-                color: "var(--text-muted)",
-                letterSpacing: "0.02em",
-                textAlign: "center",
-                lineHeight: 1.2,
-              }}
-            >
-              {tech.name}
-            </span>
+            <span className="tech-label">{tech.name}</span>
           </div>
         ))}
       </div>
     </div>
   );
 };
-
-export default TechGrid;
