@@ -675,3 +675,84 @@
   .drawer,
   .drawer-overlay { transition: none; }
 }
+
+/* ============================================================
+   EXPERIENCE — timeline minimalista
+   ============================================================ */
+
+.exp-timeline {
+  display: flex;
+  flex-direction: column;
+  padding-left: 8px;
+}
+
+.exp-item {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 16px;
+}
+
+.exp-item__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.exp-item__dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background-color: var(--surface-elevated);
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.exp-item__line {
+  flex: 1;
+  width: 1px;
+  min-height: 32px;
+  margin-top: 8px;
+  background: linear-gradient(
+    to bottom,
+    var(--border),
+    color-mix(in srgb, var(--border) 30%, transparent)
+  );
+}
+
+.exp-card {
+  background: color-mix(in srgb, var(--surface) 75%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.exp-card:hover {
+  border-color: color-mix(in srgb, var(--complementary) 60%, transparent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.exp-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 20px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  background: color-mix(in srgb, var(--surface-elevated) 40%, transparent);
+}
+
+@media (min-width: 640px) {
+  .exp-card__header {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+
+.exp-card__body {
+  padding: 16px 20px;
+}
