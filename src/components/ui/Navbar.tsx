@@ -1,86 +1,175 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from "react";
+import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
+import { useTheme } from "../../hooks";
 
-interface AppContentNav {
-  name: string
-  tag: string
+interface NavItem {
+  name: string;
+  tag: string;
 }
 
-const appcontent: AppContentNav[] = [
-  { name: 'Hero', tag: '#hero' },
-  { name: 'About', tag: '#about' },
-  { name: 'Stack', tag: '#stack' },
-  { name: 'Experience', tag: '#exp' },
-  { name: 'Portfolio', tag: '#portfolio' },
-  { name: 'Contact', tag: '#contact' },
-]
+const NAV_ITEMS: NavItem[] = [
+  { name: "Home", tag: "#hero" },
+  { name: "Experience", tag: "#exp" },
+  { name: "Stack", tag: "#stack" },
+  { name: "About", tag: "#about" },
+  { name: "Portfolio", tag: "#portfolio" },
+  { name: "Contact", tag: "#contact" },
+];
 
 export const Navbar = () => {
-  const [isVisible, setIsVisible] = useState(false)
-  const [activeSection, setActiveSection] = useState('')
+  const [activeSection, setActiveSection] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { theme, toggle } = useTheme();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // Show navbar after 100px scroll
-      setIsVisible(window.scrollY > 100)
-
-      // Detect active section
-      const sections = appcontent.map((item) => item.tag.substring(1))
-      let current = ''
-
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          if (rect.top <= 150 && rect.bottom >= 150) {
-            current = `#${sectionId}`
-            break
-          }
+  // ── Scroll: detect active section ──
+  const handleScroll = useCallback(() => {
+    let current = "";
+    for (const { tag } of NAV_ITEMS) {
+      const el = document.getElementById(tag.slice(1));
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= 150 && rect.bottom >= 150) {
+          current = tag;
+          break;
         }
       }
-
-      if (current) {
-        setActiveSection(current)
-      }
     }
+    if (current) setActiveSection(current);
+  }, []);
 
-    window.addEventListener('scroll', handleScroll)
-    handleScroll()
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  // ── Close drawer on Escape ──
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsMenuOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
+
+  // ── Lock body scroll when drawer open ──
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
+  const ThemeIcon = theme === "dark" ? FaSun : FaMoon;
 
   return (
-    <nav
-      className={`fixed top-2 md:top-0 left-1/2 transform -translate-x-1/2 px-3 md:px-4 py-3 bg-[var(--primary)] rounded-xl shadow-lg transition-all duration-300 z-50 w-[95vw] md:w-auto max-w-[900px] ${
-        isVisible
-          ? 'opacity-100 translate-y-0'
-          : 'opacity-0 -translate-y-4 pointer-events-none'
-      }`}
-    >
-      {/* flex-wrap so items go to a second line on small screens */}
-      <div className='flex flex-wrap justify-center items-center gap-1'>
-        {appcontent.map(({ tag, name }, idx) => (
-          <div key={idx} className='flex items-center'>
+    <>
+      {/* ══ NAVBAR BAR ══ */}
+      <nav className="navbar" aria-label="Main navigation">
+        {/* Mobile */}
+        <div className="navbar__mobile">
+          <span className="navbar__logo">AM</span>
+          <div className="flex items-center gap-2">
+            <button
+              className="theme-btn"
+              onClick={toggle}
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            >
+              <ThemeIcon size={15} />
+            </button>
+            <button
+              className="hamburger-btn"
+              onClick={() => setIsMenuOpen(true)}
+              aria-label="Open menu"
+              aria-expanded={isMenuOpen}
+            >
+              <FaBars size={18} />
+            </button>
+          </div>
+        </div>
+
+        {/* Desktop */}
+        <div className="navbar__desktop">
+          {NAV_ITEMS.map(({ tag, name }) => (
             <a
+              key={tag}
               href={tag}
-              className={`text-[var(--secondary)] font-medium hover:opacity-80 transition-opacity px-2 py-1 rounded text-center ${
-                activeSection === tag
-                  ? 'bg-[var(--secondary)] bg-opacity-20 font-bold'
-                  : ''
-              }`}
+              className={`navbar-link ${activeSection === tag ? "navbar-link--active" : ""}`}
+            >
+              {name}
+              {activeSection === tag && (
+                <span className="navbar-link__dot" aria-hidden="true" />
+              )}
+            </a>
+          ))}
+          <div className="navbar__separator" />
+          <button
+            className="theme-btn"
+            onClick={toggle}
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          >
+            <ThemeIcon size={15} />
+          </button>
+        </div>
+      </nav>
+
+      {/* ══ DRAWER OVERLAY (mobile) ══ */}
+      <div
+        className={`drawer-overlay ${isMenuOpen ? "drawer-overlay--open" : ""}`}
+        onClick={() => setIsMenuOpen(false)}
+        aria-hidden="true"
+      />
+
+      {/* ══ DRAWER PANEL (mobile) ══ */}
+      <aside
+        className={`drawer ${isMenuOpen ? "drawer--open" : ""}`}
+        aria-label="Navigation menu"
+        aria-hidden={!isMenuOpen}
+      >
+        <div className="drawer__header">
+          <span className="navbar__logo">AM</span>
+          <button
+            className="hamburger-btn"
+            onClick={() => setIsMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <FaTimes size={18} />
+          </button>
+        </div>
+
+        <nav className="drawer__nav">
+          {NAV_ITEMS.map(({ tag, name }) => (
+            <a
+              key={tag}
+              href={tag}
+              className={`drawer-link ${activeSection === tag ? "drawer-link--active" : ""}`}
+              onClick={() => setIsMenuOpen(false)}
             >
               {name}
             </a>
+          ))}
+        </nav>
 
-            {/* hide separators on small screens so they don't force extra width */}
-            {idx < appcontent.length - 1 && (
-              <span className='mx-1 text-[var(--secondary)] opacity-50 hidden md:inline-block'>
-                {'>'}
-              </span>
-            )}
-          </div>
-        ))}
-      </div>
-    </nav>
-  )
-}
+        <div className="drawer__footer">
+          <button
+            className="theme-btn"
+            onClick={toggle}
+            style={{
+              width: "100%",
+              borderRadius: "10px",
+              height: "40px",
+              gap: "8px",
+              fontSize: "0.8125rem",
+            }}
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          >
+            <ThemeIcon size={15} />
+            <span style={{ fontWeight: 500, color: "var(--text-muted)" }}>
+              {theme === "dark" ? "Dark mode" : "Light mode"}
+            </span>
+          </button>
+        </div>
+      </aside>
+    </>
+  );
+};

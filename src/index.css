@@ -428,3 +428,250 @@
 .hero-btn-primary {
   animation: btn-glow 3.5s ease-in-out infinite;
 }
+
+/* ============================================================
+   NAVBAR — glassmorphism sticky
+   ============================================================ */
+
+/* ── Barra principal ── */
+.navbar {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  width: calc(100% - 32px);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid color-mix(in srgb, var(--border) 45%, transparent);
+  border-radius: 14px;
+  padding: 10px 16px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ── Layouts ── */
+.navbar__mobile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar__desktop {
+  display: none;
+  align-items: center;
+  gap: 2px;
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    width: auto;
+    max-width: 820px;
+    border-radius: 50px;
+    padding: 7px 14px 7px 20px;
+  }
+
+  .navbar__mobile { display: none; }
+  .navbar__desktop { display: flex; }
+}
+
+/* ── Logo badge AM ── */
+.navbar__logo {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--primary);
+  background: color-mix(in srgb, var(--complementary) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--complementary) 35%, transparent);
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+/* ── Desktop nav links ── */
+.navbar-link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 11px;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.navbar-link:hover {
+  color: var(--primary);
+  background-color: color-mix(in srgb, var(--surface-elevated) 55%, transparent);
+}
+
+.navbar-link--active {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.navbar-link__dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--complementary);
+  animation: dot-scale 0.2s ease both;
+}
+
+@keyframes dot-scale {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+/* ── Separator ── */
+.navbar__separator {
+  width: 1px;
+  height: 18px;
+  margin: 0 8px;
+  background: color-mix(in srgb, var(--border) 55%, transparent);
+}
+
+/* ── Theme toggle button ── */
+.theme-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background-color: color-mix(in srgb, var(--surface-elevated) 55%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 45%, transparent);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.35s ease;
+}
+
+.theme-btn:hover {
+  background-color: var(--complementary);
+  color: var(--background);
+  transform: rotate(25deg);
+}
+
+/* ── Hamburger button ── */
+.hamburger-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background-color: color-mix(in srgb, var(--surface-elevated) 50%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 45%, transparent);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.hamburger-btn:hover {
+  background-color: var(--surface-elevated);
+  color: var(--primary);
+}
+
+/* ============================================================
+   DRAWER — mobile slide-in desde la derecha
+   ============================================================ */
+
+/* Overlay */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: 60;
+  pointer-events: none;
+  transition: background 0.28s ease;
+}
+
+.drawer-overlay--open {
+  background: rgba(0, 0, 0, 0.45);
+  pointer-events: all;
+}
+
+/* Panel */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  min-width: 240px;
+  max-width: 320px;
+  z-index: 70;
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border-left: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  box-shadow: -8px 0 40px rgba(0, 0, 0, 0.28);
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer--open {
+  transform: translateX(0);
+}
+
+.drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 38%, transparent);
+}
+
+.drawer__nav {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px;
+  flex: 1;
+  gap: 2px;
+}
+
+.drawer-link {
+  display: flex;
+  align-items: center;
+  padding: 13px 16px;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, padding-left 0.2s ease;
+}
+
+.drawer-link:hover {
+  color: var(--primary);
+  background-color: color-mix(in srgb, var(--surface-elevated) 60%, transparent);
+  padding-left: 20px;
+}
+
+.drawer-link--active {
+  color: var(--primary);
+  background-color: color-mix(in srgb, var(--complementary) 12%, transparent);
+  border-left-color: var(--complementary);
+  font-weight: 600;
+  padding-left: 20px;
+}
+
+.drawer__footer {
+  padding: 14px 20px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 38%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .drawer,
+  .drawer-overlay { transition: none; }
+}
