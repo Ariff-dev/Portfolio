@@ -756,3 +756,95 @@
 .exp-card__body {
   padding: 16px 20px;
 }
+
+/* ============================================================
+   STACK — grid de cards glassmorphism
+   ============================================================ */
+
+/* Grid: 1 col mobile, 3 col desktop */
+.stack-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .stack-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+/* ── Stack card ── */
+.stack-card {
+  background: color-mix(in srgb, var(--surface) 75%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.stack-card:hover {
+  border-color: color-mix(in srgb, var(--complementary) 55%, transparent);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+}
+
+.stack-card__header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  background: color-mix(in srgb, var(--surface-elevated) 40%, transparent);
+}
+
+.stack-card__body {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+/* ── Category block ── */
+.stack-category {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Tech pill ── */
+.stack-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--border);
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+  cursor: default;
+}
+
+.stack-pill:hover {
+  background-color: color-mix(in srgb, var(--surface-elevated) 80%, var(--complementary));
+  border-color: color-mix(in srgb, var(--complementary) 50%, transparent);
+  transform: translateY(-1px);
+}
+
+.stack-pill__name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.stack-pill__context {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  opacity: 0.7;
+}

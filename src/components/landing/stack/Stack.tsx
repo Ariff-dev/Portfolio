@@ -6,187 +6,242 @@ import {
   FaDatabase,
   FaUbuntu,
   FaBug,
-} from 'react-icons/fa'
+  FaCode,
+  FaServer,
+  FaLayerGroup,
+} from "react-icons/fa";
 import {
   SiTailwindcss,
   SiFlask,
   SiPostgresql,
   SiMysql,
   SiNginx,
-} from 'react-icons/si'
-import { MdApi } from 'react-icons/md'
+} from "react-icons/si";
+import { MdApi } from "react-icons/md";
+import { LevelBadge, StackItemPill } from "../components";
+import type { StackGroup } from "../interfaces";
+import { STACK_LEVEL_CONFIG } from "../config/stackLevelconfig";
 
+const ICON_SIZE = 16;
+const C = {
+  primary: "var(--primary)",
+  mid: "var(--secondary)",
+  learning: "var(--text-muted)",
+};
+
+const STACKS: StackGroup[] = [
+  {
+    id: "fullstack",
+    title: "Full-Stack Web",
+    subtitle: "Full-Stack Web Development",
+    icon: <FaLayerGroup size={14} />,
+    level: "primary",
+    levelLabel: "Primary Stack",
+    categories: [
+      {
+        label: "Frontend",
+        items: [
+          {
+            name: "React",
+            icon: <FaReact size={ICON_SIZE} color={C.primary} />,
+          },
+          {
+            name: "Angular",
+            icon: <FaAngular size={ICON_SIZE} color={C.primary} />,
+          },
+          {
+            name: "Tailwind",
+            icon: <SiTailwindcss size={ICON_SIZE} color={C.primary} />,
+          },
+        ],
+      },
+      {
+        label: "Backend",
+        items: [
+          {
+            name: "Flask",
+            icon: <SiFlask size={ICON_SIZE} color={C.primary} />,
+            context: "Python",
+          },
+          { name: "PHP", icon: <FaPhp size={ICON_SIZE} color={C.primary} /> },
+          {
+            name: "RESTful APIs",
+            icon: <MdApi size={ICON_SIZE} color={C.primary} />,
+          },
+        ],
+      },
+      {
+        label: "Databases",
+        items: [
+          {
+            name: "PostgreSQL",
+            icon: <SiPostgresql size={ICON_SIZE} color={C.primary} />,
+          },
+          {
+            name: "MySQL",
+            icon: <SiMysql size={ICON_SIZE} color={C.primary} />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "fintech",
+    title: "Backend & FinTech",
+    subtitle: "Back-end & Data Processing",
+    icon: <FaServer size={14} />,
+    level: "mid",
+    levelLabel: "Mid-Level Stack",
+    categories: [
+      {
+        label: "Languages",
+        items: [
+          { name: "PHP", icon: <FaPhp size={ICON_SIZE} color={C.mid} /> },
+          { name: "Python", icon: <FaPython size={ICON_SIZE} color={C.mid} /> },
+        ],
+      },
+      {
+        label: "Databases",
+        items: [
+          {
+            name: "PostgreSQL",
+            icon: <SiPostgresql size={ICON_SIZE} color={C.mid} />,
+          },
+          { name: "MySQL", icon: <SiMysql size={ICON_SIZE} color={C.mid} /> },
+          { name: "SQL", icon: <FaDatabase size={ICON_SIZE} color={C.mid} /> },
+        ],
+      },
+      {
+        label: "Tools",
+        items: [
+          {
+            name: "RESTful APIs",
+            icon: <MdApi size={ICON_SIZE} color={C.mid} />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "devops",
+    title: "Cloud / DevOps",
+    subtitle: "Cloud & Infrastructure",
+    icon: <FaCode size={14} />,
+    level: "learning",
+    levelLabel: "Exploring",
+    categories: [
+      {
+        label: "Infrastructure",
+        items: [
+          {
+            name: "Nginx",
+            icon: <SiNginx size={ICON_SIZE} color={C.learning} />,
+          },
+          {
+            name: "Ubuntu",
+            icon: <FaUbuntu size={ICON_SIZE} color={C.learning} />,
+          },
+        ],
+      },
+      {
+        label: "Tools",
+        items: [
+          {
+            name: "Debugging",
+            icon: <FaBug size={ICON_SIZE} color={C.learning} />,
+          },
+        ],
+      },
+    ],
+  },
+];
+
+/* ══════════════════════════════════════════════════════════════
+   STACK SECTION
+══════════════════════════════════════════════════════════════ */
 export const Stack = () => {
   return (
-    <section id='stack' className=' py-4'>
-      <h2 className='text-(--primary) text-2xl text-pretty'>Tech Stacks</h2>
-
-      {/* Primary Stack */}
-      <div className='py-4 flex flex-col'>
-        <h3 className='text-lg bg-(--secondary) text-pretty text-(--contrast) text-center rounded-t-sm'>
-          Full-Stack Web Development
-        </h3>
-        <span className='bg-(--primary) text-pretty p-1 w-1/3 text-center rounded-b-sm text-(--secondary)'>
-          Primary Stack
-        </span>
-        <ul>
-          <li className='flex flex-col'>
-            <p className='bg-(--tertiary) text-(--contrast) text-pretty text-center'>
-              Front-end
-            </p>
-            <ul className='flex gap-6 justify-center border-2 border-(--tertiary) items-center list-none'>
-              <li className='flex items-center gap-2'>
-                <FaReact className='text-blue-500 text-2xl' />
-                <span>React</span>
-              </li>
-              <li className='flex items-center gap-2'>
-                <FaAngular className='text-red-600 text-2xl' />
-                <span>Angular</span>
-              </li>
-              <li className='flex items-center gap-2'>
-                <SiTailwindcss className='text-cyan-500 text-2xl' />
-                <span>Tailwind CSS</span>
-              </li>
-            </ul>
-          </li>
-          <li className='flex flex-col'>
-            <p className='bg-(--tertiary) text-(--contrast) text-pretty text-center'>
-              Back-end
-            </p>
-            <ul className='flex gap-6 justify-center border-2 border-(--tertiary) items-center list-none'>
-              <li className='flex items-center gap-2'>
-                <SiFlask className='text-gray-700 text-2xl' />
-                <span>Flask (Python)</span>
-              </li>
-              <li className='flex items-center gap-2'>
-                <FaPhp className='text-indigo-600 text-2xl' />
-                <span>PHP</span>
-              </li>
-            </ul>
-          </li>
-          <li className='flex flex-col'>
-            <p className='bg-(--tertiary) text-(--contrast) text-pretty text-center'>
-              Databases
-            </p>
-            <ul className='flex gap-6 justify-center border-2 border-(--tertiary) items-center list-none'>
-              <li className='flex items-center gap-2'>
-                <SiPostgresql className='text-blue-700 text-2xl' />
-                <span>PostgreSQL</span>
-              </li>
-              <li className='flex items-center gap-2'>
-                <SiMysql className='text-blue-500 text-2xl' />
-                <span>MySQL</span>
-              </li>
-            </ul>
-          </li>
-          <li className='flex flex-col'>
-            <p className='bg-(--tertiary) text-(--contrast) text-pretty text-center'>
-              APIs
-            </p>
-            <ul className='flex gap-6 justify-center border-2 border-(--tertiary) items-center list-none'>
-              <li className='flex items-center gap-2'>
-                <MdApi className='text-green-600 text-2xl' />
-                <span>RESTful APIs</span>
-              </li>
-            </ul>
-          </li>
-        </ul>
+    <section id="stack" className="py-16 md:py-20">
+      {/* Section header — igual que Experience */}
+      <div className="mb-10">
+        <p
+          className="text-xs font-semibold uppercase tracking-widest mb-2"
+          style={{ color: "var(--complementary)" }}
+        >
+          Technical
+        </p>
+        <h2 className="hero-name text-3xl sm:text-4xl font-bold tracking-tight">
+          Tech Stack
+        </h2>
       </div>
 
-      {/* Mid-Level Stack */}
-      <div className='py-4 flex flex-col'>
-        <h3 className='text-lg bg-(--secondary) text-pretty text-(--contrast) text-center rounded-t-sm'>
-          Back-end & Data Processing (FinTech-focused)
-        </h3>
-        <span className='bg-(--primary) text-pretty p-1 w-1/3 text-center rounded-b-sm text-(--secondary)'>
-          Mid-Level Stack
-        </span>
-        <ul>
-          <li className='flex flex-col'>
-            <p className='bg-(--tertiary) text-(--contrast) text-pretty text-center'>
-              Languages
-            </p>
-            <ul className='flex gap-6 justify-center border-2 border-(--tertiary) items-center list-none'>
-              <li className='flex items-center gap-2'>
-                <FaPhp className='text-indigo-600 text-2xl' />
-                <span>PHP</span>
-              </li>
-              <li className='flex items-center gap-2'>
-                <FaPython className='text-yellow-500 text-2xl' />
-                <span>Python</span>
-              </li>
-            </ul>
-          </li>
-          <li className='flex flex-col'>
-            <p className='bg-(--tertiary) text-(--contrast) text-pretty text-center'>
-              Databases
-            </p>
-            <ul className='flex gap-6 justify-center border-2 border-(--tertiary) items-center list-none'>
-              <li className='flex items-center gap-2'>
-                <SiPostgresql className='text-blue-700 text-2xl' />
-                <span>PostgreSQL</span>
-              </li>
-              <li className='flex items-center gap-2'>
-                <SiMysql className='text-blue-500 text-2xl' />
-                <span>MySQL</span>
-              </li>
-            </ul>
-          </li>
-          <li className='flex flex-col'>
-            <p className='bg-(--tertiary) text-(--contrast) text-pretty text-center'>
-              Tools
-            </p>
-            <ul className='flex gap-6 justify-center border-2 border-(--tertiary) items-center list-none'>
-              <li className='flex items-center gap-2'>
-                <FaDatabase className='text-gray-600 text-2xl' />
-                <span>SQL</span>
-              </li>
-              <li className='flex items-center gap-2'>
-                <MdApi className='text-green-600 text-2xl' />
-                <span>RESTful APIs</span>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+      {/* Stack groups grid */}
+      <div className="stack-grid">
+        {STACKS.map((group) => {
+          const cfg = STACK_LEVEL_CONFIG[group.level];
+          return (
+            <div key={group.id} className="stack-card">
+              {/* Card header */}
+              <div
+                className="stack-card__header"
+                style={{
+                  borderBottom: `1px solid color-mix(in srgb, var(--border) 60%, transparent)`,
+                }}
+              >
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center gap-2">
+                    <span style={{ color: cfg.dot }}>{group.icon}</span>
+                    <h3
+                      className="text-base font-bold"
+                      style={{ color: "var(--primary)" }}
+                    >
+                      {group.title}
+                    </h3>
+                  </div>
+                  <p className="text-xs" style={{ color: "var(--text-muted)" }}>
+                    {group.subtitle}
+                  </p>
+                </div>
+                <LevelBadge level={group.level} label={group.levelLabel} />
+              </div>
 
-      {/* Learning Stack */}
-      <div className='py-4 flex flex-col'>
-        <h3 className='text-lg bg-(--secondary) text-pretty text-(--contrast) text-center rounded-t-sm'>
-          Cloud / DevOps
-        </h3>
-        <span className='bg-(--primary) text-pretty p-1 w-1/3 text-center rounded-b-sm text-(--secondary)'>
-          Learning Stack
-        </span>
-        <ul>
-          <li className='flex flex-col'>
-            <p className='bg-(--tertiary) text-(--contrast) text-pretty text-center'>
-              Cloud Services
-            </p>
-            <ul className='flex gap-6 justify-center border-2 border-(--tertiary) items-center list-none'>
-              <li className='flex items-center gap-2'>
-                <SiNginx className='text-green-700 text-2xl' />
-                <span>Nginx</span>
-              </li>
-              <li className='flex items-center gap-2'>
-                <FaUbuntu className='text-orange-500 text-2xl' />
-                <span>Ubuntu Server</span>
-              </li>
-            </ul>
-          </li>
-          <li className='flex flex-col'>
-            <p className='bg-(--tertiary) text-(--contrast) text-pretty text-center'>
-              Testing / Support
-            </p>
-            <ul className='flex gap-6 justify-center border-2 border-(--tertiary) items-center list-none'>
-              <li className='flex items-center gap-2'>
-                <FaBug className='text-red-500 text-2xl' />
-                <span>Debugging</span>
-              </li>
-            </ul>
-          </li>
-        </ul>
+              {/* Categories */}
+              <div className="stack-card__body">
+                {group.categories.map((cat) => (
+                  <div key={cat.label} className="stack-category">
+                    {/* Category label */}
+                    <div className="flex items-center gap-2 mb-2">
+                      <span
+                        className="text-xs font-semibold uppercase tracking-widest"
+                        style={{ color: "var(--complementary)" }}
+                      >
+                        {cat.label}
+                      </span>
+                      <div
+                        className="flex-1 h-px"
+                        style={{
+                          backgroundColor: `color-mix(in srgb, var(--border) 50%, transparent)`,
+                        }}
+                      />
+                    </div>
+
+                    {/* Items */}
+                    <div className="flex flex-wrap gap-2">
+                      {cat.items.map((item) => (
+                        <StackItemPill
+                          key={item.name}
+                          item={item}
+                          level={group.level}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
-  )
-}
+  );
+};
