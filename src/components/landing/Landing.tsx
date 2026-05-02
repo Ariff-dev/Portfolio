@@ -10,9 +10,9 @@ export const Landing = () => {
     <>
       <Hero />
       <Experience />
-      <About />
       <Stack />
       <Portfolio />
+      <About />
       <Contact />
     </>
   );
