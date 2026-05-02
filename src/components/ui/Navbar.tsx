@@ -13,7 +13,6 @@ const NAV_ITEMS: NavItem[] = [
   { name: "Stack", tag: "#stack" },
   { name: "Portfolio", tag: "#portfolio" },
   { name: "About", tag: "#about" },
-  { name: "Contact", tag: "#contact" },
 ];
 
 export const Navbar = () => {
