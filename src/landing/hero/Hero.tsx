@@ -1,11 +1,11 @@
-import Photo from "../../../assets/me.png";
 import {
   FaGithub,
   FaLinkedin,
   FaFileAlt,
   FaMapMarkerAlt,
 } from "react-icons/fa";
-import { useTypewriter, useExperience } from "../../../hooks";
+import Photo from "../../assets/me.png";
+import { useTypewriter, useExperience } from "../../hooks";
 import { StatCard, TechCarousel } from "../components";
 
 const ROLES = ["Backend Developer", "Business Analyst", "FinTech Specialist"];

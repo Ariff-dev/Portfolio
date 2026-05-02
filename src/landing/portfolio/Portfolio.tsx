@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { FaExternalLinkAlt, FaTimes, FaGithub, FaCode } from "react-icons/fa";
-import type { Project } from "../interfaces/Portfolio.interface";
-import PrestigeAgency from "../../../assets/portfolio/prestige_agency_p.png";
-import Dashboard from "../../../assets/portfolio/dashboard.png";
-import HybridgeCommunity from "../../../assets/portfolio/hybridgecommunity.png";
+import PrestigeAgency from "../../assets/portfolio/prestige_agency_p.png";
+import Dashboard from "../../assets/portfolio/dashboard.png";
+import HybridgeCommunity from "../../assets/portfolio/hybridgecommunity.png";
 import { ProjectCard, TechTag } from "../components";
+import type { Project } from "../interfaces";
 
 /* ── Data ── */
 const PROJECTS: Project[] = [
