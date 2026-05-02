@@ -136,11 +136,11 @@ export const Hero = () => {
               className="flex flex-wrap gap-3 justify-center md:justify-start hero-animate"
               style={{ animationDelay: "460ms" }}
             >
-              <a href="/cv.pdf" download className="hero-btn-primary">
+              <a href="/Ariff_Martinez_CV_EN.pdf" download="Ariff_Martinez_CV.pdf" className="hero-btn-primary">
                 <FaFileAlt size={14} />
                 Download CV
               </a>
-              <a href="#contact" className="hero-btn-secondary">
+              <a href="mailto:ariff.dev24@gmail.com" className="hero-btn-secondary">
                 Contact me
               </a>
             </div>
@@ -184,9 +184,9 @@ export const Hero = () => {
               <FaLinkedin size={16} />
               <span>LinkedIn</span>
             </a>
-            <a
-              href="/cv.pdf"
-              download
+              <a
+              href="/Ariff_Martinez_CV_EN.pdf"
+              download="Ariff_Martinez_CV.pdf"
               className="social-link-full social-link-primary"
             >
               <FaFileAlt size={16} />
