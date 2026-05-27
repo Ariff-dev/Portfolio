@@ -14,12 +14,12 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { name: "Home",       tag: "#hero",      type: "hash" },
-  { name: "Experience", tag: "#exp",       type: "hash" },
-  { name: "Stack",      tag: "#stack",     type: "hash" },
-  { name: "Portfolio",  tag: "#portfolio", type: "hash" },
-  { name: "About",      tag: "#about",     type: "hash" },
-  { name: "Blog",       tag: "/blog",      type: "path" },
+  { name: "Home", tag: "#hero", type: "hash" },
+  { name: "Experience", tag: "#exp", type: "hash" },
+  { name: "Stack", tag: "#stack", type: "hash" },
+  { name: "Portfolio", tag: "#portfolio", type: "hash" },
+  { name: "About", tag: "#about", type: "hash" },
+  { name: "Blog", tag: "/blog", type: "path" },
 ];
 
 export const Navbar = () => {
@@ -82,6 +82,7 @@ export const Navbar = () => {
 
   const isActive = (item: NavItem) => {
     if (item.type === "path") return location.pathname.startsWith(item.tag);
+    if (!isOnHome) return false;
     return activeSection === item.tag;
   };
 
