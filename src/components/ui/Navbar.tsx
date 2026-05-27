@@ -1,29 +1,44 @@
 import { useState, useEffect, useCallback } from "react";
-import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FaBars, FaTimes, FaSun, FaMoon, FaPenNib, FaSignOutAlt, FaUserShield } from "react-icons/fa";
 import { useTheme } from "../../hooks";
+import { useAuth } from "../../blog/hooks/useAuth";
+
+// Hash anchors scroll within the home page; path entries use React Router.
 
 interface NavItem {
   name: string;
+  /** hash = anchor scroll en / | path = ruta real */
   tag: string;
+  type: "hash" | "path";
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { name: "Home", tag: "#hero" },
-  { name: "Experience", tag: "#exp" },
-  { name: "Stack", tag: "#stack" },
-  { name: "Portfolio", tag: "#portfolio" },
-  { name: "About", tag: "#about" },
+  { name: "Home",       tag: "#hero",      type: "hash" },
+  { name: "Experience", tag: "#exp",       type: "hash" },
+  { name: "Stack",      tag: "#stack",     type: "hash" },
+  { name: "Portfolio",  tag: "#portfolio", type: "hash" },
+  { name: "About",      tag: "#about",     type: "hash" },
+  { name: "Blog",       tag: "/blog",      type: "path" },
 ];
 
 export const Navbar = () => {
   const [activeSection, setActiveSection] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, toggle } = useTheme();
+  const { isAuthenticated, user, logout } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // ── Scroll: detect active section ──
+  const isOnHome = location.pathname === "/";
+  const isOnBlog = location.pathname.startsWith("/blog");
+
+  // ── Scroll: detect active section (solo en Home) ──
   const handleScroll = useCallback(() => {
+    if (!isOnHome) return;
     let current = "";
-    for (const { tag } of NAV_ITEMS) {
+    for (const { tag, type } of NAV_ITEMS) {
+      if (type !== "hash") continue;
       const el = document.getElementById(tag.slice(1));
       if (el) {
         const rect = el.getBoundingClientRect();
@@ -34,7 +49,7 @@ export const Navbar = () => {
       }
     }
     if (current) setActiveSection(current);
-  }, []);
+  }, [isOnHome]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -54,18 +69,88 @@ export const Navbar = () => {
   // ── Lock body scroll when drawer open ──
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => { document.body.style.overflow = ""; };
   }, [isMenuOpen]);
 
   const ThemeIcon = theme === "dark" ? FaSun : FaMoon;
 
+  const handleLogout = async () => {
+    await logout();
+    navigate("/blog");
+    setIsMenuOpen(false);
+  };
+
+  const isActive = (item: NavItem) => {
+    if (item.type === "path") return location.pathname.startsWith(item.tag);
+    return activeSection === item.tag;
+  };
+
+  const handleNavClick = (item: NavItem, closeMobile = false) => {
+    if (closeMobile) setIsMenuOpen(false);
+    if (item.type === "path") return;
+    if (!isOnHome) {
+      navigate("/" + item.tag);
+    }
+  };
+
+  const renderDesktopItem = (item: NavItem) => {
+    const active = isActive(item);
+    const className = `navbar-link ${active ? "navbar-link--active" : ""} ${item.type === "path" ? "navbar-link--route" : ""}`;
+
+    if (item.type === "path") {
+      return (
+        <Link key={item.tag} to={item.tag} className={className}>
+          <FaPenNib size={11} />
+          {item.name}
+          {active && <span className="navbar-link__dot" aria-hidden="true" />}
+        </Link>
+      );
+    }
+    return (
+      <a
+        key={item.tag}
+        href={isOnHome ? item.tag : `/${item.tag}`}
+        className={className}
+        onClick={() => handleNavClick(item)}
+      >
+        {item.name}
+        {active && <span className="navbar-link__dot" aria-hidden="true" />}
+      </a>
+    );
+  };
+
+  const renderDrawerItem = (item: NavItem) => {
+    const active = isActive(item);
+    const className = `drawer-link ${active ? "drawer-link--active" : ""}`;
+
+    if (item.type === "path") {
+      return (
+        <Link
+          key={item.tag}
+          to={item.tag}
+          className={className}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          <FaPenNib size={13} style={{ marginRight: 8 }} />
+          {item.name}
+        </Link>
+      );
+    }
+    return (
+      <a
+        key={item.tag}
+        href={isOnHome ? item.tag : `/${item.tag}`}
+        className={className}
+        onClick={() => handleNavClick(item, true)}
+      >
+        {item.name}
+      </a>
+    );
+  };
+
   return (
     <>
-      {/* ══ NAVBAR BAR ══ */}
       <nav className="navbar" aria-label="Main navigation">
-        {/* Mobile */}
         <div className="navbar__mobile">
           <span className="navbar__logo">AM</span>
           <div className="flex items-center gap-2">
@@ -87,21 +172,29 @@ export const Navbar = () => {
           </div>
         </div>
 
-        {/* Desktop */}
         <div className="navbar__desktop">
-          {NAV_ITEMS.map(({ tag, name }) => (
-            <a
-              key={tag}
-              href={tag}
-              className={`navbar-link ${activeSection === tag ? "navbar-link--active" : ""}`}
-            >
-              {name}
-              {activeSection === tag && (
-                <span className="navbar-link__dot" aria-hidden="true" />
-              )}
-            </a>
-          ))}
+          {NAV_ITEMS.map(renderDesktopItem)}
           <div className="navbar__separator" />
+
+          {isAuthenticated && isOnBlog && (
+            <>
+              <div className="navbar-session-chip">
+                <FaUserShield size={11} />
+                <span className="navbar-session-chip__email">
+                  {user?.email?.split("@")[0]}
+                </span>
+              </div>
+              <button
+                className="navbar-logout-btn"
+                onClick={handleLogout}
+                aria-label="Sign out"
+                title="Sign out"
+              >
+                <FaSignOutAlt size={13} />
+              </button>
+            </>
+          )}
+
           <button
             className="theme-btn"
             onClick={toggle}
@@ -112,14 +205,12 @@ export const Navbar = () => {
         </div>
       </nav>
 
-      {/* ══ DRAWER OVERLAY (mobile) ══ */}
       <div
         className={`drawer-overlay ${isMenuOpen ? "drawer-overlay--open" : ""}`}
         onClick={() => setIsMenuOpen(false)}
         aria-hidden="true"
       />
 
-      {/* ══ DRAWER PANEL (mobile) ══ */}
       <aside
         className={`drawer ${isMenuOpen ? "drawer--open" : ""}`}
         aria-label="Navigation menu"
@@ -137,16 +228,17 @@ export const Navbar = () => {
         </div>
 
         <nav className="drawer__nav">
-          {NAV_ITEMS.map(({ tag, name }) => (
-            <a
-              key={tag}
-              href={tag}
-              className={`drawer-link ${activeSection === tag ? "drawer-link--active" : ""}`}
-              onClick={() => setIsMenuOpen(false)}
+          {NAV_ITEMS.map(renderDrawerItem)}
+
+          {isAuthenticated && isOnBlog && (
+            <button
+              className="drawer-link drawer-logout-link"
+              onClick={handleLogout}
             >
-              {name}
-            </a>
-          ))}
+              <FaSignOutAlt size={13} style={{ marginRight: 8 }} />
+              Sign out
+            </button>
+          )}
         </nav>
 
         <div className="drawer__footer">
@@ -169,6 +261,18 @@ export const Navbar = () => {
           </button>
         </div>
       </aside>
+
+      {/* Show the editor FAB only to authenticated users */}
+      {isOnBlog && isAuthenticated && (
+        <Link
+          to="/blog/editor"
+          className="blog-fab"
+          aria-label="New post"
+          title="New post"
+        >
+          <FaPenNib size={18} />
+        </Link>
+      )}
     </>
   );
 };
