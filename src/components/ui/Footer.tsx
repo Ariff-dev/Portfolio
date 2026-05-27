@@ -6,6 +6,7 @@ const NAV_LINKS = [
   { label: "Stack", href: "#stack" },
   { label: "Portfolio", href: "#portfolio" },
   { label: "About", href: "#about" },
+
 ];
 
 const SOCIAL_LINKS = [
