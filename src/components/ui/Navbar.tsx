@@ -100,7 +100,6 @@ export const Navbar = () => {
     if (item.type === "path") {
       return (
         <Link key={item.tag} to={item.tag} className={className}>
-          <FaPenNib size={11} />
           {item.name}
           {active && <span className="navbar-link__dot" aria-hidden="true" />}
         </Link>
@@ -131,7 +130,6 @@ export const Navbar = () => {
           className={className}
           onClick={() => setIsMenuOpen(false)}
         >
-          <FaPenNib size={13} style={{ marginRight: 8 }} />
           {item.name}
         </Link>
       );
