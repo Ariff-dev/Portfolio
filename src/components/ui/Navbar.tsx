@@ -1,8 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaBars, FaTimes, FaSun, FaMoon, FaPenNib, FaSignOutAlt, FaUserShield } from "react-icons/fa";
+import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
 import { useTheme } from "../../hooks";
-import { useAuth } from "../../blog/hooks/useAuth";
 
 // Hash anchors scroll within the home page; path entries use React Router.
 
@@ -26,12 +25,10 @@ export const Navbar = () => {
   const [activeSection, setActiveSection] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, toggle } = useTheme();
-  const { isAuthenticated, user, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
   const isOnHome = location.pathname === "/";
-  const isOnBlog = location.pathname.startsWith("/blog");
 
   // ── Scroll: detect active section (solo en Home) ──
   const handleScroll = useCallback(() => {
@@ -73,12 +70,6 @@ export const Navbar = () => {
   }, [isMenuOpen]);
 
   const ThemeIcon = theme === "dark" ? FaSun : FaMoon;
-
-  const handleLogout = async () => {
-    await logout();
-    navigate("/blog");
-    setIsMenuOpen(false);
-  };
 
   const isActive = (item: NavItem) => {
     if (item.type === "path") return location.pathname.startsWith(item.tag);
@@ -175,25 +166,6 @@ export const Navbar = () => {
           {NAV_ITEMS.map(renderDesktopItem)}
           <div className="navbar__separator" />
 
-          {isAuthenticated && isOnBlog && (
-            <>
-              <div className="navbar-session-chip">
-                <FaUserShield size={11} />
-                <span className="navbar-session-chip__email">
-                  {user?.email?.split("@")[0]}
-                </span>
-              </div>
-              <button
-                className="navbar-logout-btn"
-                onClick={handleLogout}
-                aria-label="Sign out"
-                title="Sign out"
-              >
-                <FaSignOutAlt size={13} />
-              </button>
-            </>
-          )}
-
           <button
             className="theme-btn"
             onClick={toggle}
@@ -228,16 +200,6 @@ export const Navbar = () => {
 
         <nav className="drawer__nav">
           {NAV_ITEMS.map(renderDrawerItem)}
-
-          {isAuthenticated && isOnBlog && (
-            <button
-              className="drawer-link drawer-logout-link"
-              onClick={handleLogout}
-            >
-              <FaSignOutAlt size={13} style={{ marginRight: 8 }} />
-              Sign out
-            </button>
-          )}
         </nav>
 
         <div className="drawer__footer">
@@ -260,18 +222,6 @@ export const Navbar = () => {
           </button>
         </div>
       </aside>
-
-      {/* Show the editor FAB only to authenticated users */}
-      {isOnBlog && isAuthenticated && (
-        <Link
-          to="/blog/editor"
-          className="blog-fab"
-          aria-label="New post"
-          title="New post"
-        >
-          <FaPenNib size={18} />
-        </Link>
-      )}
     </>
   );
 };
